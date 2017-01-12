@@ -14,14 +14,17 @@
   <body>
 
     <a-scene>
-      <a-assets>
+      <a-assets timeout="3000">
 
 	<a-asset-item id="nameFont" src="fonts/name_font.json"></a-asset-item>
       
       </a-assets>
 
-      <a-sky color="#222"></a-sky>
-      <a-entity position="-3 1 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
+      <a-sky color="white"></a-sky>
+      <a-box scale="2 5 .5" position="2 0 -4" color="#444"></a-box>
+      <a-plane scale="10 10  10" rotation="-90 0 0" material="color: grey; opacity: .5"></a-plane>
+      <a-entity scale=".5 .5 .5" position="-2 .5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
+      <a-entity scale=".5 -.5 .5" position="-2 -.5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
       
     </a-scene>
   </body>
