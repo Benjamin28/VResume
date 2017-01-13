@@ -27,9 +27,9 @@
       <a-cylinder id="faceBlockMirrorExpand" rotation="90 0 0" scale="0 0 0" position="1 -2.5 -4" color="grey"></a-cylinder>
       <a-entity id="faceBlockMirrorExpandToken" scale=" 0 0 0" position=".76 -2.68 -3.75" text="text: +; font: #nameFont" material="color: green"></a-entity>
       
-      <a-plane scale="10 10  10" rotation="-90 0 0" material="color: grey; opacity: .5"></a-plane>
-      <a-entity id="name" scale=".5 .5 .5" position="-2 .5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
-      <a-entity id="nameReflection" scale=".5 -.5 .5" position="-2 -.5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
+      <a-plane scale="10 10  10" rotation="-90 0 0" material="src: img/white_marble.jpg; color: grey; opacity: .8"></a-plane>
+      <a-entity id="nameTag" scale=".5 .5 .5" position="-2 .5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
+      <a-entity id="nameTagReflection" scale=".5 -.5 .5" position="-2 -.5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
 
       <a-camera>
 
@@ -43,6 +43,7 @@
     //entities we want to listen to
     var faceBlock = document.getElementById('faceBlock');
     var faceBlockExpand = document.getElementById('faceBlockExpand');
+
 
     //listeners for eyeover face block
     faceBlock.addEventListener('mouseenter', function () {
@@ -58,6 +59,18 @@
     faceBlockMirrorExpandToken.setAttribute('scale', {x: 0, y: 0, z: 0});
     faceBlockExpand.setAttribute('scale', {x: 0, y: 0, z: 0});
     faceBlockMirrorExpand.setAttribute('scale', {x: 0, y: 0, z: 0});
+    });
+
+    //listener for eye over expansion block
+    faceBlockExpand.addEventListener('mouseenter', function () {
+    faceBlock.setAttribute('scale', {x: 0, y: 0, z: 0});
+    faceBlockExpandToken.setAttribute('scale', {x: 0, y: 0, z: 0});
+    faceBlockMirrorExpandToken.setAttribute('scale', {x: 0, y: 0, z: 0});
+    faceBlockExpand.setAttribute('scale', {x: 0, y: 0, z: 0});
+    faceBlockMirrorExpand.setAttribute('scale', {x: 0, y: 0, z: 0});
+    console.log(name);
+    nameTag.setAttribute('scale', {x: 0, y: 0, z: 0});
+    nameTagReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
     });
 
     
