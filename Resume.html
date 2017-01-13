@@ -35,13 +35,24 @@
       <a-plane id="FBCAcademicReflection" src="img/academicMirror.png" position="2 -1.29163 -3.745" scale="2 .75 1"></a-plane>
       <a-plane id="FBCPersonal" src="img/personal.png" position="2 2.125 -3.745" scale="2 .75 1"></a-plane>
       <a-plane id="FBCPersonalReflection" src="img/personalMirror.png" position="2 -2.125 -3.745" scale="2 .75 1"></a-plane>
-
-
       <a-plane id="FBInterfaceLayer" opacity="0" position="2 1.25 -3.744" scale="2 2.5 1"></a-plane>
       
       <a-plane scale="10 10  10" rotation="-90 0 0" material="src: img/white_marble.jpg; color: grey; opacity: .8"></a-plane>
       <a-entity id="nameTag" scale=".5 .5 .5" position="-2 .5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
       <a-entity id="nameTagReflection" scale=".5 -.5 .5" position="-2 -.5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
+
+
+      <!-- master block -->
+
+      <a-box id="MB1" scale="0 0 0" color="#c4c5c0" position="0.5 .41666 -4">
+	<a-box position = "0 0 .1" opacity="0"></a-box>
+      </a-box>
+      <a-box id="MB2" scale="0 0 0" color="#c4c5c0" position="0.5 1.25 -4">
+	<a-box position = "0 0 .1" opacity="0"></a-box>
+      </a-box>
+      <a-box id="MB3" scale="0 0 0" color="#c4c5c0" position="0.5 2.08333 -4">
+	<a-box scale="0 0 0"position = "0 0 .1" opacity="0"></a-box>
+      </a-box>
 
       <a-camera>
 
@@ -84,15 +95,40 @@
     console.log(name);
     nameTag.setAttribute('scale', {x: 0, y: 0, z: 0});
     nameTagReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
-
     FBCProfessional.setAttribute('scale', {x: 0, y: 0, z: 0});
     FBCProfessionalReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
     FBCAcademic.setAttribute('scale', {x: 0, y: 0, z: 0});
     FBCAcademicReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
     FBCPersonal.setAttribute('scale', {x: 0, y: 0, z: 0});
     FBCPersonalReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
+
+    //actual expansion happens here
+    MB1.setAttribute('scale', {x: 5, y: .83333, z: .5});
+    MB2.setAttribute('scale', {x: 5, y: .83333, z: .5});
+    MB3.setAttribute('scale', {x: 5, y: .83333, z: .5});
     });
 
+    //listeners for master blocks
+    MB1.addEventListener('mouseenter', function () {
+    MB1.setAttribute('color', 'green');
+    });
+    MB1.addEventListener('mouseleave', function () {
+    MB1.setAttribute('color', '#c4c5c0');
+    });
+
+    MB2.addEventListener('mouseenter', function () {
+    MB2.setAttribute('color', 'green');
+    });
+    MB2.addEventListener('mouseleave', function () {
+    MB2.setAttribute('color', '#c4c5c0');
+    });
+
+    MB3.addEventListener('mouseenter', function () {
+    MB3.setAttribute('color', 'green');
+    });
+    MB3.addEventListener('mouseleave', function () {
+    MB3.setAttribute('color', '#c4c5c0');
+    });
     
   </script>
 </html>
