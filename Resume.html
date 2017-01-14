@@ -29,6 +29,7 @@
       <a-cylinder id="faceBlockExpand" rotation="90 0 0" scale="0 0 0" position="1 2.5 -4" color="#c4c5c0">
 	<a-cylinder position="0 .3 0" opacity="0"></a-cylinder>
       </a-cylinder>
+      
       <a-entity id="faceBlockExpandToken" scale=" 0 0 0" position=".76 2.32 -3.73" text="text: +; font: #nameFont" material="color: green"></a-entity>
       <a-cylinder id="faceBlockMirrorExpand" rotation="90 0 0" scale="0 0 0" position="1 -2.5 -4" color="#c4c5c0"></a-cylinder>
       <a-entity id="faceBlockMirrorExpandToken" scale=" 0 0 0" position=".76 -2.68 -3.75" text="text: +; font: #nameFont" material="color: green"></a-entity>
@@ -50,8 +51,16 @@
 
       <a-cylinder id="MBCollapse" rotation="90 0 0" scale="0 0 0" position="-2 2.5 -3.998" color="#c4c5c0">
 	<a-cylinder position="0 .3 0" opacity="0"></a-cylinder>
-	<a-entity id="MBExpandToken" scale=" 0 0 0" position=".76 2.32 -3.73" text="text: +; font: #nameFont" material="color: green"></a-entity>
       </a-cylinder>
+      <a-entity id="MBCollapseToken" scale="0 0 0" position="-2.2 2.32 -3.87" text="text: -; font: #nameFont" material="color: green"></a-entity>
+
+      <a-cylinder id="MBMirrorCollapse" rotation="90 0 0" scale="0 0 0" position="-2 -2.5 -3.998" color="#c4c5c0">
+	<a-cylinder position="0 .3 0" opacity="0"></a-cylinder>
+      </a-cylinder>
+      <a-entity id="MBMirrorCollapseToken" scale="0 0 0" position="-2.2 -2.68 -3.87" text="text: -; font: #nameFont" material="color: green"></a-entity>
+
+
+      
       <a-box id="MB1" scale="0 0 0" color="#c4c5c0" position="0.5 .41666 -4">
 	<a-plane id="MBFace1" color="white" src="img/masterProfessional.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51"></a-plane>
 	<a-plane id="MBFace1R" scale=".95 .80 1" color="#c4c5c0" color="white" src="img/masterProfessionalMirror.png" position="0 -1 .51"></a-plane>
