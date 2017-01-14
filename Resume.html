@@ -6,6 +6,8 @@
     <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
     <script src="components/aframe-obj-loader-component.min.js"></script>
     <script src="components/aframe-text-component.js"></script>
+    <script src="scripts/master_block.js"></script>
+    <script src="scripts/face_block.js"></script>
     
     
   </head>
@@ -24,7 +26,9 @@
 
       <!-- face block collapsed -->
       <a-box id="faceBlock" scale="2 5 .5" position="2 0 -4" color="#c4c5c0"></a-box>
-      <a-cylinder id="faceBlockExpand" rotation="90 0 0" scale="0 0 0" position="1 2.5 -4" color="#c4c5c0"></a-cylinder>
+      <a-cylinder id="faceBlockExpand" rotation="90 0 0" scale="0 0 0" position="1 2.5 -4" color="#c4c5c0">
+	<a-cylinder position="0 .3 0" opacity="0"></a-cylinder>
+      </a-cylinder>
       <a-entity id="faceBlockExpandToken" scale=" 0 0 0" position=".76 2.32 -3.73" text="text: +; font: #nameFont" material="color: green"></a-entity>
       <a-cylinder id="faceBlockMirrorExpand" rotation="90 0 0" scale="0 0 0" position="1 -2.5 -4" color="#c4c5c0"></a-cylinder>
       <a-entity id="faceBlockMirrorExpandToken" scale=" 0 0 0" position=".76 -2.68 -3.75" text="text: +; font: #nameFont" material="color: green"></a-entity>
@@ -44,18 +48,30 @@
 
       <!-- master block -->
 
+      <a-cylinder id="MBCollapse" rotation="90 0 0" scale="0 0 0" position="-2 2.5 -3.998" color="#c4c5c0">
+	<a-cylinder position="0 .3 0" opacity="0"></a-cylinder>
+	<a-entity id="MBExpandToken" scale=" 0 0 0" position=".76 2.32 -3.73" text="text: +; font: #nameFont" material="color: green"></a-entity>
+      </a-cylinder>
       <a-box id="MB1" scale="0 0 0" color="#c4c5c0" position="0.5 .41666 -4">
+	<a-plane id="MBFace1" color="white" src="img/masterProfessional.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51"></a-plane>
+	<a-plane id="MBFace1R" scale=".95 .80 1" color="#c4c5c0" color="white" src="img/masterProfessionalMirror.png" position="0 -1 .51"></a-plane>
 	<a-box position = "0 0 .1" opacity="0"></a-box>
+	<a-box id="MB1Reflection" color="#c4c5c0" position="0 -1 0"></a-box>
       </a-box>
       <a-box id="MB2" scale="0 0 0" color="#c4c5c0" position="0.5 1.25 -4">
+	<a-plane id="MBFace2" color="white" src="img/masterAcademic.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51"></a-plane>
+	<a-plane id="MBFace2R" scale=".95 .80 1" color="white" color="white" src="img/masterAcademicMirror.png" position="0 -3 .51"></a-plane>
 	<a-box position = "0 0 .1" opacity="0"></a-box>
+	<a-box id="MB2Reflection" color="#c4c5c0" position="0 -3 0"></a-box>
       </a-box>
       <a-box id="MB3" scale="0 0 0" color="#c4c5c0" position="0.5 2.08333 -4">
+	<a-plane id="MBFace3" color="white" src="img/masterPersonal.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51"></a-plane>
+	<a-plane id="MBFace3R" color="white" src="img/masterPersonalMirror.png" scale=".95 .80 1" color="#c4c5c0" position="0 -5 .51"></a-plane>
 	<a-box scale="0 0 0"position = "0 0 .1" opacity="0"></a-box>
+	<a-box id="MB3Reflection" color="#c4c5c0" position="0 -5 0"></a-box>
       </a-box>
 
       <a-camera>
-
 	<a-cursor></a-cursor>
       </a-camera>
       
@@ -70,10 +86,7 @@
 
     //listeners for eyeover face block
     faceBlockInterface.addEventListener('mouseenter', function () {
-    faceBlockExpandToken.setAttribute('scale', {x: 1, y: 1, z: 1});
-    faceBlockMirrorExpandToken.setAttribute('scale', {x: 1, y: 1, z: 1});
-    faceBlockExpand.setAttribute('scale', {x: .25, y: .5, z: .25});
-    faceBlockMirrorExpand.setAttribute('scale', {x: .25, y: .5, z: .25});
+    face_block_token_expand();
     });
 
     //listeners for eye exit face block
@@ -85,49 +98,43 @@
     });
 
     //listener for eye over expansion block
-    faceBlockExpandToken.addEventListener('mouseenter', function () {
-    faceBlockInterface.setAttribute('scale', {x: 0, y: 0, z: 0});
-    faceBlock.setAttribute('scale', {x: 0, y: 0, z: 0});
-    faceBlockExpandToken.setAttribute('scale', {x: 0, y: 0, z: 0});
-    faceBlockMirrorExpandToken.setAttribute('scale', {x: 0, y: 0, z: 0});
-    faceBlockExpand.setAttribute('scale', {x: 0, y: 0, z: 0});
-    faceBlockMirrorExpand.setAttribute('scale', {x: 0, y: 0, z: 0});
-    console.log(name);
-    nameTag.setAttribute('scale', {x: 0, y: 0, z: 0});
-    nameTagReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
-    FBCProfessional.setAttribute('scale', {x: 0, y: 0, z: 0});
-    FBCProfessionalReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
-    FBCAcademic.setAttribute('scale', {x: 0, y: 0, z: 0});
-    FBCAcademicReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
-    FBCPersonal.setAttribute('scale', {x: 0, y: 0, z: 0});
-    FBCPersonalReflection.setAttribute('scale', {x: 0, y: 0, z: 0});
-
-    //actual expansion happens here
-    MB1.setAttribute('scale', {x: 5, y: .83333, z: .5});
-    MB2.setAttribute('scale', {x: 5, y: .83333, z: .5});
-    MB3.setAttribute('scale', {x: 5, y: .83333, z: .5});
+    faceBlockExpand.addEventListener('mouseenter', function () {
+    collapse_face_block();
+    expand_master_block();
     });
 
+
     //listeners for master blocks
+    MBCollapse.addEventListener('mouseenter', function() {
+    collapse_master_block();
+    expand_face_block();
+    });
+
     MB1.addEventListener('mouseenter', function () {
     MB1.setAttribute('color', 'green');
+    MB1Reflection.setAttribute('color', 'green');
     });
     MB1.addEventListener('mouseleave', function () {
     MB1.setAttribute('color', '#c4c5c0');
+    MB1Reflection.setAttribute('color', '#c4c5c0');
     });
 
     MB2.addEventListener('mouseenter', function () {
     MB2.setAttribute('color', 'green');
+    MB2Reflection.setAttribute('color', 'green');
     });
     MB2.addEventListener('mouseleave', function () {
     MB2.setAttribute('color', '#c4c5c0');
+    MB2Reflection.setAttribute('color', '#c4c5c0');
     });
 
     MB3.addEventListener('mouseenter', function () {
     MB3.setAttribute('color', 'green');
+    MB3Reflection.setAttribute('color', 'green');
     });
     MB3.addEventListener('mouseleave', function () {
     MB3.setAttribute('color', '#c4c5c0');
+    MB3Reflection.setAttribute('color', '#c4c5c0');
     });
     
   </script>
