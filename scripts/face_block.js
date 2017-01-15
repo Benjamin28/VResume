@@ -1,4 +1,3 @@
-
 function expand_face_block(){
     
     faceBlockInterface.setAttribute('scale', {x: 2, y: 5, z: .5});

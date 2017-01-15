@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 
 <html>
 
@@ -8,7 +8,12 @@
     <script src="components/aframe-text-component.js"></script>
     <script src="scripts/master_block.js"></script>
     <script src="scripts/face_block.js"></script>
-    
+
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="scripts/set-image.js"></script>
     
   </head>
 
@@ -19,10 +24,21 @@
       <a-assets timeout="3000">
 
 	<a-asset-item id="nameFont" src="fonts/name_font.json"></a-asset-item>
-
+	
+	<script id="change_wall" type="text/html">
+	  <a-entity class="change_wall"
+		    geometry="primitive: plane; height: 10; width: 1"
+		    material="shader: flat; color: white"
+		    event-set__1="_event: mouseenter; material.color: red"
+		    event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+		    set-image="on: mouseenter; target: #floor; src: ${src}">
+	  </a-entity>
+	</script>
+	<img id="tower" crossorigin="anonymous" src="img/ut_tower.jpg">
+	<img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
       </a-assets>
       
-      <a-sky color="white"></a-sky>
+      <a-sky id="background" src="#city"></a-sky>
 
       <!-- face block collapsed -->
       <a-box id="faceBlock" scale="2 5 .5" position="2 0 -4" color="#c4c5c0"></a-box>
@@ -41,8 +57,9 @@
       <a-plane id="FBCPersonal" src="img/personal.png" position="2 2.125 -3.745" scale="2 .75 1"></a-plane>
       <a-plane id="FBCPersonalReflection" src="img/personalMirror.png" position="2 -2.125 -3.745" scale="2 .75 1"></a-plane>
       <a-plane id="FBInterfaceLayer" opacity="0" position="2 1.25 -3.744" scale="2 2.5 1"></a-plane>
-      
-      <a-plane scale="10 10  10" rotation="-90 0 0" material="src: img/white_marble.jpg; color: grey; opacity: .8"></a-plane>
+
+      <!-- floor and name -->
+      <a-plane id="floor" scale="10 10  10" rotation="-90 0 0" material="src: img/white_marble.jpg; color: grey; opacity: .8"></a-plane>
       <a-entity id="nameTag" scale=".5 .5 .5" position="-2 .5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
       <a-entity id="nameTagReflection" scale=".5 -.5 .5" position="-2 -.5 -4" text="text: Benjamin Baker; font: #nameFont" material="color: green"></a-entity>
 
@@ -62,11 +79,22 @@
 
       
       <a-box id="MB1" scale="0 0 0" color="#c4c5c0" position="0.5 .41666 -4">
-	<a-plane id="MBFace1" color="white" src="img/masterProfessional.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51"></a-plane>
-	<a-plane id="MBFace1R" scale=".95 .80 1" color="#c4c5c0" color="white" src="img/masterProfessionalMirror.png" position="0 -1 .51"></a-plane>
+	<a-plane id="MBFace1" color="white" src="img/masterProfessional.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51">
+
+	</a-plane>
+	<a-plane id="MBFace1R" scale=".95 .80 1" color="white" color="white" src="img/masterProfessionalMirror.png" position="0 -1 .51"></a-plane>
 	<a-box position = "0 0 .1" opacity="0"></a-box>
 	<a-box id="MB1Reflection" color="#c4c5c0" position="0 -1 0"></a-box>
+
       </a-box>
+      <a-cylinder id="MB1Button" rotation="90 0 0" scale="0 0 0" color="#c4c5c0" position="2.62 .42 -3.95"></a-cylinder>
+      <a-cylinder id="MB2Button" rotation="90 0 0" scale="0 0 0" color="#c4c5c0" position="2.62 1.25 -3.95"></a-cylinder>
+      <a-cylinder id="MB3Button" rotation="90 0 0" scale="0 0 0" color="#c4c5c0" position="2.62 2.08 -3.95"></a-cylinder>
+
+      <a-cylinder id="MB1ButtonR" rotation="90 0 0" scale="0 0 0" color="#c4c5c0" position="2.62 -.42 -3.95"></a-cylinder>
+      <a-cylinder id="MB2ButtonR" rotation="90 0 0" scale="0 0 0" color="#c4c5c0" position="2.62 -1.25 -3.95"></a-cylinder>
+      <a-cylinder id="MB3ButtonR" rotation="90 0 0" scale="0 0 0" color="#c4c5c0" position="2.62 -2.08 -3.95"></a-cylinder>
+      
       <a-box id="MB2" scale="0 0 0" color="#c4c5c0" position="0.5 1.25 -4">
 	<a-plane id="MBFace2" color="white" src="img/masterAcademic.png" scale=".95 .80 1" color="#c4c5c0" position="0 0 .51"></a-plane>
 	<a-plane id="MBFace2R" scale=".95 .80 1" color="white" color="white" src="img/masterAcademicMirror.png" position="0 -3 .51"></a-plane>
@@ -80,10 +108,11 @@
 	<a-box id="MB3Reflection" color="#c4c5c0" position="0 -5 0"></a-box>
       </a-box>
 
+      <a-entity template="src: #change_wall" data-src="img/floor_personal.png"></a-entity>      
       <a-camera>
 	<a-cursor></a-cursor>
       </a-camera>
-      
+
     </a-scene>
   </body>
   <script>
@@ -120,31 +149,31 @@
     });
 
     MB1.addEventListener('mouseenter', function () {
+    unselect_face([MB2, MB3], [MB2Button, MB3Button], [MB2Reflection, MB3Reflection], [MB2ButtonR, MB3ButtonR]);
     MB1.setAttribute('color', 'green');
     MB1Reflection.setAttribute('color', 'green');
-    });
-    MB1.addEventListener('mouseleave', function () {
-    MB1.setAttribute('color', '#c4c5c0');
-    MB1Reflection.setAttribute('color', '#c4c5c0');
+    MB1Button.setAttribute('scale', {x: .25, y: .5, z: .25});
+    MB1ButtonR.setAttribute('scale', {x: .25, y: .5, z: .25});
     });
 
     MB2.addEventListener('mouseenter', function () {
+    unselect_face([MB1, MB3], [MB1Button, MB3Button], [MB1Reflection, MB3Reflection], [MB1ButtonR, MB3ButtonR]);
     MB2.setAttribute('color', 'green');
     MB2Reflection.setAttribute('color', 'green');
-    });
-    MB2.addEventListener('mouseleave', function () {
-    MB2.setAttribute('color', '#c4c5c0');
-    MB2Reflection.setAttribute('color', '#c4c5c0');
+    MB2Button.setAttribute('scale', {x: .25, y: .5, z: .25});
+    MB2ButtonR.setAttribute('scale', {x: .25, y: .5, z: .25});
     });
 
     MB3.addEventListener('mouseenter', function () {
+    unselect_face([MB1, MB2], [MB1Button, MB2Button], [MB1Reflection, MB2Reflection], [MB1ButtonR, MB2ButtonR]);
     MB3.setAttribute('color', 'green');
     MB3Reflection.setAttribute('color', 'green');
+    MB3Button.setAttribute('scale', {x: .25, y: .5, z: .25});
+    MB3ButtonR.setAttribute('scale', {x: .25, y: .5, z: .25});
     });
-    MB3.addEventListener('mouseleave', function () {
-    MB3.setAttribute('color', '#c4c5c0');
-    MB3Reflection.setAttribute('color', '#c4c5c0');
-    });
+
+    
+
     
   </script>
 </html>
