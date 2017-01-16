@@ -8,6 +8,7 @@
     <script src="components/aframe-text-component.js"></script>
     <script src="scripts/master_block.js"></script>
     <script src="scripts/face_block.js"></script>
+    <script src="scripts/change_wall.js"></script>
 
     <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
     <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
@@ -27,15 +28,13 @@
 	
 	<script id="change_wall" type="text/html">
 	  <a-entity class="change_wall"
-		    geometry="primitive: plane; height: 10; width: 1"
-		    material="shader: flat; color: white"
-		    event-set__1="_event: mouseenter; material.color: red"
-		    event-set__2="_event: mouseup; scale: 1.2 1.2 1"
-		    set-image="on: mouseenter; target: #floor; src: ${src}">
+		    geometry="primitive: plane; height: 10; width: 10"
+		    material="shader: flat; color: red; opacity: 0"
+		    set-image="on: mouseenter; target: #floor; src: ${floor}">
 	  </a-entity>
 	</script>
 	<img id="tower" crossorigin="anonymous" src="img/ut_tower.jpg">
-	<img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
+	
       </a-assets>
       
       <a-sky id="background" src="#city"></a-sky>
@@ -108,7 +107,8 @@
 	<a-box id="MB3Reflection" color="#c4c5c0" position="0 -5 0"></a-box>
       </a-box>
 
-      <a-entity template="src: #change_wall" data-src="img/floor_personal.png"></a-entity>      
+      <a-entity id="personal_change_wall"template="src: #change_wall" data-floor="img/floor_personal.png" data-opacity="1"></a-entity>
+      <a-entity id="master_change_wall" position="0 5 -5" template="src: #change_wall" data-floor="img/white_marble.jpg" data-opacity="1"></a-entity> 
       <a-camera>
 	<a-cursor></a-cursor>
       </a-camera>
@@ -121,6 +121,17 @@
     var faceBlockInterface = document.getElementById('FBInterfaceLayer');
     var faceBlockExpand = document.getElementById('faceBlockExpand');
 
+    personal_change_wall.setAttribute('scale', {x: 0, y: 0, z: 0});
+    master_change_wall.setAttribute('scale', {x: 0, y: 0, z: 0});
+
+    //listeners for change walls
+    
+    personal_change_wall.addEventListener('mouseenter', function () {
+    minimize_event_wall("right");
+    });
+    master_change_wall.addEventListener('mouseenter', function () {
+    minimize_event_wall("forward");
+    });
 
     //listeners for eyeover face block
     faceBlockInterface.addEventListener('mouseenter', function () {
@@ -172,7 +183,13 @@
     MB3ButtonR.setAttribute('scale', {x: .25, y: .5, z: .25});
     });
 
+    MB3Button.addEventListener('mouseenter', function () {
+    console.log("el triggered")
+    personal_change_wall.setAttribute('scale', {x: 1, y: 1, z: 1});
+    personal_change_wall.setAttribute('rotation', {x: 0, y: -90, z: 0});
+    personal_change_wall.setAttribute('position', {x: 5, y: 5, z: 0});
     
+    });
 
     
   </script>
